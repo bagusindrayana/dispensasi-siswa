@@ -53,7 +53,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Pengguna.php";
                                 placeholder="name@example.com">
                         </div>
                         <div class="form-group">
-                            <label for="kontak">Kotak (WA/TELP)</label>
+                            <label for="kontak">Kontak (WA/TELP)</label>
                             <input type="number" class="form-control" id="kontak" name="kontak"
                                 placeholder="08....">
                         </div>

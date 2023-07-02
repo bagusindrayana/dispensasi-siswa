@@ -57,7 +57,7 @@ $pengguna = $model->findById($_GET['id']);
                                 placeholder="name@example.com"  value="<?=$pengguna['email']?>">
                         </div>
                         <div class="form-group">
-                            <label for="kontak">Kotak (WA/TELP)</label>
+                            <label for="kontak">Kontak (WA/TELP)</label>
                             <input type="number" class="form-control" id="kontak" name="kontak"
                                 placeholder="08...."  value="<?=$pengguna['kontak']?>">
                         </div>

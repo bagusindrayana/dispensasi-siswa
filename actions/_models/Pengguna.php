@@ -100,6 +100,24 @@ class Pengguna {
 
     //delete
     public function delete($id) {
+        //delete izin where siswa_id = $id
+        $sql = "DELETE FROM izin WHERE siswa_id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        //delete izin where guru_id = $id
+        $sql = "DELETE FROM izin WHERE guru_id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        //delete izin where guru_id = $id
+        $sql = "DELETE FROM izin WHERE waka_id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        
         $sql = "DELETE FROM $this->tableName WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':id', $id);

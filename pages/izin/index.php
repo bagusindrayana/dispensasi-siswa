@@ -1,4 +1,5 @@
 <?php
+
 include_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/library/cek_session.php";
 $title = "Izin";
@@ -113,6 +114,8 @@ if ($user['rule'] == 'waka') {
                                         <?php } else { ?>
                                             <a href="<?= base_url() . '/pages/izin/detail.php?id=' . $izin['id'] ?>"
                                                     class="btn btn-info"><i class="fas fa-edit"></i> Detail</a>
+                                                    <a href="<?= base_url() . '/actions/izin_action.php?download-pdf=true&id=' . $izin['id'] ?>"
+                                                    class="btn btn-info" target="_blank"><i class="fas fa-file"></i> Download</a>
                                                 <br>
                                             <b>Izin sudah
                                                 <?php switch ($izin['status']) {
