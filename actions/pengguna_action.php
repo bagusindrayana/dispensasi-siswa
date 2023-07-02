@@ -191,6 +191,11 @@ class PenggunaAction {
         }
 
         try {
+            $data = $this->model->findById($_GET['id']);
+            //check if foto_profil is not empty and exist and delete
+            if($data['foto_profil'] != null && $data['foto_profil'] != "" && file_exists($_SERVER['DOCUMENT_ROOT']."/assets/images/pengguna/".$data['foto_profil'])) {
+                unlink($_SERVER['DOCUMENT_ROOT']."/assets/images/pengguna/".$data['foto_profil']);
+            }
             $this->model->delete($_GET['id']);
             $_SESSION['success'] = "Pengguna berhasil di hapus";
             header("Location: ../pages/pengguna/index.php");
