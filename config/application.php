@@ -1,6 +1,6 @@
 <?php
 $app_name = "DISPENSASI SISWA";
-$dev = "development";
+$dev = "local";
 $app_url = null;
 
 function base_url(){
