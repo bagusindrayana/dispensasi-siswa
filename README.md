@@ -52,3 +52,19 @@ if($user['rule']!='waka'){
 }
 ```
 yang artinya halaman pengguna hanya bisa di akses oleh user dengan rule waka, jika user yang login bukan waka maka akan di redirect ke halaman 404
+
+
+## Nama Aplikasi
+- silahkan ganti nama aplikasi di file `config/application.php`
+```php
+$app_name = "DISPENSASI SISWA";
+```
+- logo aplikasi juga dapat di ganti dengan mengubah url pada `config/application.php`
+```php
+$logo_url = "/assets/img/logo.png";
+//bisa di ganti menjadi path sesuai dengan nama logo yang ada di folder assets/img, atau link logo dari luar
+```
+
+
+## Url Aplikasi
+- silahkan ganti nilai `app_url` di file `config/application.php` sesuai dengan url aplikasi anda jika terkendala masalah cross origin atau file asset tidak terload
