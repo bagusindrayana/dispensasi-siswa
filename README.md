@@ -11,6 +11,9 @@ di buat dengan PHP Native
 - [Font Awesome](https://fontawesome.com/)
 - [Template Admin](https://github.com/HackerThemes/spur-template)
 
+## Library php yang di gunakan
+- [Dompdf](https://github.com/dompdf/dompdf)
+
 ## Instalasi
 - Clone repository ini
 - buat database baru
