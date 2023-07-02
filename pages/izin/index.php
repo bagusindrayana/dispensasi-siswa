@@ -30,7 +30,7 @@ if ($user['rule'] == 'waka') {
 <div class="container-fluid">
     <h1 class="dash-title">Data Izin</h1>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <div class="card spur-card">
                 <div class="card-header">
                     <form class="searchbox" action="#!">
@@ -44,8 +44,8 @@ if ($user['rule'] == 'waka') {
                             class="fas fa-plus"></i> Tambah Izin</a>
                     <?php } ?>
                 </div>
-                <div class="card-body ">
-                    <table class="table table-in-card">
+                <div class="card-body table-responsive">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>

@@ -22,7 +22,7 @@ $izins = $model->paginationAndSearch(10, $_GET['search'] ?? '',$query);
 <div class="container-fluid">
     <h1 class="dash-title">Verifikasi Izin Pending</h1>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <div class="card spur-card">
                 <div class="card-header">
                     <form class="searchbox" action="#!">

@@ -14,7 +14,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Pengguna.php";
 <div class="container-fluid">
     <h1 class="dash-title">Tambah Pengguna</h1>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <div class="card spur-card">
                 <div class="card-header text-right">
                     <div class="spur-card-title"> Tambah Data Pengguna</div>
