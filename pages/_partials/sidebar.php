@@ -4,7 +4,9 @@
             <i class="fas fa-bars"></i>
         </a>
 
-        <a href="/">
+        <a href="/" class="text-center">
+            <img src="<?= $logo_url ?>" alt="Logo Sekolah" style="width:75px;">
+            <br>
             <?= @$app_name ?>
         </a>
     </header>

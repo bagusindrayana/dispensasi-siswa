@@ -1,7 +1,8 @@
 <?php
 $app_name = "DISPENSASI SISWA";
-$dev = "local";
+$dev = "development";
 $app_url = null;
+$logo_url = "/assets/img/logo-smk-ti-airlangga.png";
 
 function base_url(){
     global $dev,$app_url;

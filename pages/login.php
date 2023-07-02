@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT']."/config/application.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/config/application.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -27,11 +27,14 @@ if (isset($_SESSION['login']) && $_SESSION['user']) {
 
 <body>
     <div class="form-screen">
-        <a href="index.html" class="spur-logo"><i class="fas fa-user"></i> <span>
+    <img src="<?=$logo_url?>" alt="Logo Sekolah" style="width:100px;">
+        <a href="/" class="spur-logo">
+        
+            <span>
                 <?= $app_name ?>
             </span></a>
         <div class="card account-dialog">
-            <div class="card-header bg-primary text-white"> Silahkan login </div>
+            <div class="card-header bg-primary text-white">Silahkan login </div>
             <div class="card-body">
                 <?php
                 include_once "../library/session_message.php";
@@ -42,12 +45,13 @@ if (isset($_SESSION['login']) && $_SESSION['user']) {
                             placeholder="Username..." required name="username">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required name="password">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                            required name="password">
                     </div>
-                    
+
                     <div class="account-dialog-actions">
                         <button type="submit" class="btn btn-primary" name="login">LOGIN</button>
-                        
+
                     </div>
                 </form>
             </div>
