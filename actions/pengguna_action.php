@@ -40,7 +40,46 @@ class PenggunaAction {
             'kontak' => $_POST['kontak'],
             'username' => $_POST['username'],
             'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+            'jenis_kelamin' => $_POST['jenis_kelamin'],
         ];
+
+        //validate $_FILES['foto_profil']
+        if(isset($_FILES['foto_profil']) && $_FILES['foto_profil']['name'] != "") {
+            $target_dir = $_SERVER['DOCUMENT_ROOT']."/assets/images/pengguna/";
+            //check dir
+            if(!file_exists($target_dir)) {
+                mkdir($target_dir, 0777, true);
+            }
+            $target_file = $target_dir . basename($_FILES["foto_profil"]["name"]);
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            $check = getimagesize($_FILES["foto_profil"]["tmp_name"]);
+            if($check === false) {
+                $_SESSION['error'] = "File yang di upload bukan gambar";
+                //redirect back
+                header("Location: ../pages/pengguna/tambah.php");
+                exit;
+            }
+            if ($_FILES["foto_profil"]["size"] > 5000000) {
+                $_SESSION['error'] = "Ukuran file terlalu besar";
+                //redirect back
+                header("Location: ../pages/pengguna/tambah.php");
+                exit;
+            }
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+                $_SESSION['error'] = "Format file tidak di dukung";
+                //redirect back
+                header("Location: ../pages/pengguna/tambah.php");
+                exit;
+            }
+            $data['foto_profil'] = basename($_FILES["foto_profil"]["name"]);
+            //upload file
+            if (!move_uploaded_file($_FILES["foto_profil"]["tmp_name"], $target_file)) {
+                $_SESSION['error'] = "File gagal di upload";
+                //redirect back
+                header("Location: ../pages/pengguna/tambah.php");
+                exit;
+            }
+        }
 
         try {
             $this->model->create($data);
@@ -86,11 +125,49 @@ class PenggunaAction {
             'email' => $_POST['email'],
             'kontak' => $_POST['kontak'],
             'username' => $_POST['username'],
-            
+            'jenis_kelamin' => $_POST['jenis_kelamin'],
         ];
 
         if(isset($_POST['password_baru']) && $_POST['password_baru'] != ""){
             $data['password'] = password_hash($_POST['password_baru'], PASSWORD_DEFAULT);
+        }
+
+        //validate $_FILES['foto_profil']
+        if(isset($_FILES['foto_profil']) && $_FILES['foto_profil']['name'] != "") {
+            $target_dir = $_SERVER['DOCUMENT_ROOT']."/assets/images/pengguna/";
+            //check dir
+            if(!file_exists($target_dir)) {
+                mkdir($target_dir, 0777, true);
+            }
+            $target_file = $target_dir . basename($_FILES["foto_profil"]["name"]);
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            $check = getimagesize($_FILES["foto_profil"]["tmp_name"]);
+            if($check === false) {
+                $_SESSION['error'] = "File yang di upload bukan gambar";
+                //redirect back
+                header("Location: ../pages/pengguna/tambah.php");
+                exit;
+            }
+            if ($_FILES["foto_profil"]["size"] > 5000000) {
+                $_SESSION['error'] = "Ukuran file terlalu besar";
+                //redirect back
+                header("Location: ../pages/pengguna/tambah.php");
+                exit;
+            }
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+                $_SESSION['error'] = "Format file tidak di dukung";
+                //redirect back
+                header("Location: ../pages/pengguna/tambah.php");
+                exit;
+            }
+            $data['foto_profil'] = basename($_FILES["foto_profil"]["name"]);
+            //upload file
+            if (!move_uploaded_file($_FILES["foto_profil"]["tmp_name"], $target_file)) {
+                $_SESSION['error'] = "File gagal di upload";
+                //redirect back
+                header("Location: ../pages/pengguna/tambah.php");
+                exit;
+            }
         }
 
         try {
