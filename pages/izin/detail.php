@@ -1,7 +1,7 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/library/cek_session.php";
-$title = "Ubah Izin";
+$title = "Detail Izin";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/pages/_partials/top.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Izin.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Pengguna.php";
@@ -12,11 +12,11 @@ $gurus = $modelIzin->rawQuery("SELECT * FROM pengguna WHERE rule = 'guru'")->fet
 $izin = $modelIzin->rawQuery("SELECT izin.*,siswa.nomor,siswa.nama_lengkap as nama_siswa,guru.nama_lengkap as nama_guru FROM izin 
 INNER JOIN pengguna as siswa ON siswa.id = izin.siswa_id 
 INNER JOIN pengguna as guru ON guru.id = izin.guru_id  WHERE izin.id = " . $_GET['id'])->fetch();
-if ($izin['status'] != 'pending') {
-    $_SESSION['error'] = 'Izin tidak dapat diubah';
-    header('Location: ' . base_url() . '/pages/izin/index.php');
-    exit;
-}
+// if ($izin['status'] != 'pending') {
+//     $_SESSION['error'] = 'Izin tidak dapat diubah';
+//     header('Location: ' . base_url() . '/pages/izin/index.php');
+//     exit;
+// }
 ?>
 
 <div class="container-fluid">
@@ -61,10 +61,36 @@ if ($izin['status'] != 'pending') {
                         <li>
                             Tanggal/Waktu :
                             <br>
-                            <?= $izin['tanggal'] ?>/
+                            <?= $izin['tanggal'] ?> /
                             <?= $izin['waktu'] ?>
                         </li>
                     </ul>
+                    <hr>
+                    <p>Status : </p>
+                    <?php if($izin['status']!='pending'){?>
+                        <b>Izin sudah
+                        <?php switch ($izin['status']) {
+                            case "pending":
+                                echo '<span class="text-warning">Pending</span>';
+                                break;
+                            case "disetujui":
+                                echo '<span class="text-success">Disetujui</span>';
+                                break;
+                            case "ditolak":
+                                echo '<span class="text-danger">Ditolak</span>';
+                                break;
+                        } ?> pada tanggal
+                        <?= $izin['waktu_status_diubah'] ?>
+                    </b>
+                    <br>
+                    <b>Dengan Keterangan : </b>
+                    <br>
+                    <i>
+                        <?= $izin['keterangan_status_diubah'] ?>
+                    </i>
+                    <?php }else{?>
+                        <span class="badge badge-warning">Pending</span>
+                    <?php }?>
                 </div>
             </div>
         </div>
