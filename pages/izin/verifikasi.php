@@ -1,14 +1,14 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/library/cek_session.php";
+include_once __DIR__ . "/../../config/database.php";
+include_once __DIR__ . "/../../library/cek_session.php";
 if($user['rule']=='guru'){
     http_response_code(404);
     echo "404 Not Found";
     die();
 }
 $title = "Izin";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/pages/_partials/top.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Izin.php";
+include_once __DIR__ . "/../../pages/_partials/top.php";
+include_once __DIR__ . "/../../actions/_models/Izin.php";
 
 $model = new Izin();
 $query = "SELECT izin.*,siswa.nama_lengkap as nama_siswa,guru.nama_lengkap as nama_guru FROM izin 
@@ -106,5 +106,5 @@ $izins = $model->paginationAndSearch(10, $_GET['search'] ?? '',$query);
     </div>
 </div>
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . "/pages/_partials/bottom.php";
+include_once __DIR__ . "/../../pages/_partials/bottom.php";
 ?>

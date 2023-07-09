@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']."/config/database.php";
+require_once __DIR__."/../config/database.php";
+require_once __DIR__."/../config/database.php";
 //cek session login
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -17,6 +18,6 @@ $stmt->bindParam(':username', $user['username']);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 if(!$user){
-    header("Location: ../pages/login.php");
+    header("Location: ".base_url()."/pages/login.php");
     exit;
 }

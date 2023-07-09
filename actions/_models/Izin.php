@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']."/config/database.php";
+require_once __DIR__ . "/../../config/database.php";
 class Izin {
     private $tableName = "izin";
     private $conn;

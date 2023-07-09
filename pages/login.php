@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . "/config/application.php";
+include_once __DIR__ . "/../config/application.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -28,7 +28,7 @@ if (isset($_SESSION['login']) && $_SESSION['user']) {
 <body>
     <div class="form-screen">
     <img src="<?=$logo_url?>" alt="Logo Sekolah" style="width:100px;">
-        <a href="/" class="spur-logo">
+        <a href="<?=base_url()?>" class="spur-logo">
         
             <span>
                 <?= $app_name ?>
@@ -37,9 +37,9 @@ if (isset($_SESSION['login']) && $_SESSION['user']) {
             <div class="card-header bg-primary text-white">Silahkan login </div>
             <div class="card-body">
                 <?php
-                include_once "../library/session_message.php";
+                include_once __DIR__."/../library/session_message.php";
                 ?>
-                <form action="../actions/login_action.php" method="POST">
+                <form action="<?=base_url()?>/actions/login_action.php" method="POST">
                     <div class="form-group">
                         <input type="text" class="form-control" id="username" aria-describedby="usernameHelp"
                             placeholder="Username..." required name="username">

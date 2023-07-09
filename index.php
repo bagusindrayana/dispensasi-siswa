@@ -1,7 +1,8 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/library/cek_session.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/pages/_partials/top.php";
+include_once __DIR__ . "/config/application.php";
+include_once __DIR__ . "/config/database.php";
+include_once __DIR__ . "/library/cek_session.php";
+include_once __DIR__ . "/pages/_partials/top.php";
 
 $jumlahPengguna = 0;
 $jumlahPengguna = $conn->query("SELECT COUNT(*) FROM pengguna")->fetchColumn();
@@ -96,5 +97,5 @@ $jumlahIzinDisetujui = $conn->query("SELECT COUNT(*) FROM izin WHERE status = 'd
 
 </div>
 <?php
-include_once "./pages/_partials/bottom.php";
+include_once __DIR__."/pages/_partials/bottom.php";
 ?>

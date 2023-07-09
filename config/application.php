@@ -10,6 +10,9 @@ $logo_url = "/assets/img/logo-smk-ti-airlangga.png";
 function base_url(){
     global $dev;
     global $app_url;
+    if($app_url != null && !empty($app_url)){
+        return $app_url;
+    }
     if(isset($_SERVER['HTTPS'])){
         $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
     } else if($dev != "local"){
@@ -18,5 +21,5 @@ function base_url(){
     else{
         $protocol = 'http';
     }
-    return $protocol . "://" . (($app_url !== null && !empty($app_url)) ? $app_url : $_SERVER['HTTP_HOST']);
+    return $protocol . "://" . $_SERVER['HTTP_HOST'];
 }

@@ -1,14 +1,14 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/library/cek_session.php";
+include_once __DIR__ . "/../../config/database.php";
+include_once __DIR__ . "/../../library/cek_session.php";
 if ($user['rule'] != 'waka') {
     http_response_code(404);
     echo "404 Not Found";
     die();
 }
 $title = "Tambah Pengguna";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/pages/_partials/top.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Pengguna.php";
+include_once __DIR__ . "/../../pages/_partials/top.php";
+include_once __DIR__ . "/../../actions/_models/Pengguna.php";
 ?>
 
 <div class="container-fluid">
@@ -91,7 +91,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Pengguna.php";
     </div>
 </div>
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . "/pages/_partials/bottom.php";
+include_once __DIR__ . "/../../pages/_partials/bottom.php";
 ?>
 
 <script>

@@ -17,7 +17,7 @@ class PenggunaAction {
         if(!isset($_POST['nama_lengkap']) || !isset($_POST['rule']) || !isset($_POST['username']) || !isset($_POST['password'])) {
             $_SESSION['error'] = "Silahkan lengkapi semua inputan";
             //redirect back
-            header("Location: ../pages/pengguna/tambah.php");
+            header("Location: ".base_url()."/pages/pengguna/tambah.php");
             exit;
         }
 
@@ -28,7 +28,7 @@ class PenggunaAction {
         $stmt->execute();
         if($stmt->rowCount()){
             $_SESSION['error'] = "Username sudah pernah digunakan";
-            header("Location: ../pages/pengguna/index.php");
+            header("Location: ".base_url()."/pages/pengguna/index.php");
             exit;
         }
 
@@ -56,19 +56,19 @@ class PenggunaAction {
             if($check === false) {
                 $_SESSION['error'] = "File yang di upload bukan gambar";
                 //redirect back
-                header("Location: ../pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/tambah.php");
                 exit;
             }
             if ($_FILES["foto_profil"]["size"] > 5000000) {
                 $_SESSION['error'] = "Ukuran file terlalu besar";
                 //redirect back
-                header("Location: ../pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/tambah.php");
                 exit;
             }
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
                 $_SESSION['error'] = "Format file tidak di dukung";
                 //redirect back
-                header("Location: ../pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/tambah.php");
                 exit;
             }
             $data['foto_profil'] = basename($_FILES["foto_profil"]["name"]);
@@ -76,7 +76,7 @@ class PenggunaAction {
             if (!move_uploaded_file($_FILES["foto_profil"]["tmp_name"], $target_file)) {
                 $_SESSION['error'] = "File gagal di upload";
                 //redirect back
-                header("Location: ../pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/tambah.php");
                 exit;
             }
         }
@@ -84,11 +84,11 @@ class PenggunaAction {
         try {
             $this->model->create($data);
             $_SESSION['success'] = "Pengguna berhasil di tambah";
-            header("Location: ../pages/pengguna/index.php");
+            header("Location: ".base_url()."/pages/pengguna/index.php");
         } catch (\Throwable $th) {
             $_SESSION['error'] = "Pengguna gagal di tambah : ".$th->getMessage();
             //redirect back
-            header("Location: ../pages/pengguna/tambah.php");
+            header("Location: ".base_url()."/pages/pengguna/tambah.php");
         }
     }
 
@@ -96,7 +96,7 @@ class PenggunaAction {
         if(!isset($_POST['nama_lengkap']) || !isset($_POST['rule']) || !isset($_POST['username'])) {
             $_SESSION['error'] = "Silahkan lengkapi semua inputan";
             //redirect back
-            header("Location: ../pages/pengguna/edit.php?id=".$_GET['id']);
+            header("Location: ".base_url()."/pages/pengguna/edit.php?id=".$_GET['id']);
             exit;
         }
         $sql = "SELECT * FROM  pengguna  WHERE id = :id";
@@ -112,7 +112,7 @@ class PenggunaAction {
             $stmt->execute();
             if($stmt->rowCount()){
                 $_SESSION['error'] = "Username sudah pernah digunakan";
-                header("Location: ../pages/pengguna/edit.php?id=".$_GET['id']);
+                header("Location: ".base_url()."/pages/pengguna/edit.php?id=".$_GET['id']);
                 exit;
             }
         }
@@ -145,19 +145,19 @@ class PenggunaAction {
             if($check === false) {
                 $_SESSION['error'] = "File yang di upload bukan gambar";
                 //redirect back
-                header("Location: ../pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/tambah.php");
                 exit;
             }
             if ($_FILES["foto_profil"]["size"] > 5000000) {
                 $_SESSION['error'] = "Ukuran file terlalu besar";
                 //redirect back
-                header("Location: ../pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/tambah.php");
                 exit;
             }
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
                 $_SESSION['error'] = "Format file tidak di dukung";
                 //redirect back
-                header("Location: ../pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/tambah.php");
                 exit;
             }
             $data['foto_profil'] = basename($_FILES["foto_profil"]["name"]);
@@ -165,7 +165,7 @@ class PenggunaAction {
             if (!move_uploaded_file($_FILES["foto_profil"]["tmp_name"], $target_file)) {
                 $_SESSION['error'] = "File gagal di upload";
                 //redirect back
-                header("Location: ../pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/tambah.php");
                 exit;
             }
         }
@@ -173,11 +173,11 @@ class PenggunaAction {
         try {
             $this->model->update($_GET['id'],$data);
             $_SESSION['success'] = "Pengguna berhasil di ubah";
-            header("Location: ../pages/pengguna/index.php");
+            header("Location: ".base_url()."/pages/pengguna/index.php");
         } catch (\Throwable $th) {
             $_SESSION['error'] = "Pengguna gagal di ubah : ".$th->getMessage();
             //redirect back
-            header("Location: ../pages/pengguna/edit.php");
+            header("Location: ".base_url()."/pages/pengguna/edit.php");
         }
     }
 
@@ -186,7 +186,7 @@ class PenggunaAction {
         if(!isset($_GET['id'])) {
             $_SESSION['error'] = "Silahkan pilih data yang akan di hapus";
             //redirect back
-            header("Location: ../pages/pengguna/index.php");
+            header("Location: ".base_url()."/pages/pengguna/index.php");
             exit;
         }
 
@@ -198,11 +198,11 @@ class PenggunaAction {
             }
             $this->model->delete($_GET['id']);
             $_SESSION['success'] = "Pengguna berhasil di hapus";
-            header("Location: ../pages/pengguna/index.php");
+            header("Location: ".base_url()."/pages/pengguna/index.php");
         } catch (\Throwable $th) {
             $_SESSION['error'] = "Pengguna gagal di hapus : ".$th->getMessage();
             //redirect back
-            header("Location: ../pages/pengguna/index.php");
+            header("Location: ".base_url()."/pages/pengguna/index.php");
         }
     }
 }

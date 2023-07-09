@@ -1,10 +1,10 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/config/application.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/library/cek_session.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Izin.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Pengguna.php";
+include_once __DIR__ . "/../../config/database.php";
+include_once __DIR__ . "/../../config/application.php";
+include_once __DIR__ . "/../../library/cek_session.php";
+include_once __DIR__ . "/../../actions/_models/Izin.php";
+include_once __DIR__ . "/../../actions/_models/Pengguna.php";
 $modelIzin = new Izin();
 $izin = $modelIzin->rawQuery("SELECT izin.*,siswa.nomor,siswa.nama_lengkap as nama_siswa,guru.nama_lengkap as nama_guru,waka.nama_lengkap as nama_waka FROM izin 
 INNER JOIN pengguna as siswa ON siswa.id = izin.siswa_id 

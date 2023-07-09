@@ -10,7 +10,7 @@ class LoginAction {
     public function login() {
         if(!isset($_POST['username']) || !isset($_POST['password'])){
             $_SESSION['error'] = "Silahkan lengkapi form login";
-            header("Location: ../pages/login.php");
+            header("Location: ".base_url()."/pages/login.php");
         }
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -21,7 +21,7 @@ class LoginAction {
         $stmt->execute();
         if(!$stmt->rowCount()){
             $_SESSION['error'] = "Username atau password salah";
-            header("Location: ../pages/login.php");
+            header("Location: ".base_url()."/pages/login.php");
             exit;
         }
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -29,7 +29,7 @@ class LoginAction {
         if(!password_verify($password, $result['password'])){
             //set session error message
             $_SESSION['error'] = "Username atau password salah";
-            header("Location: ../pages/login.php");
+            header("Location: ".base_url()."/pages/login.php");
             exit;
         }
         
@@ -43,14 +43,14 @@ class LoginAction {
                 "username"=>$result['username'],
                 "rule"=>$result['rule'],
             ];
-            header("Location: ../index.php");
+            header("Location: ".base_url()."/index.php");
         } else {
-            header("Location: ../pages/login.php");
+            header("Location: ".base_url()."/pages/login.php");
         }
     }
     public function logout() {
         session_destroy();
-        header("Location: ../pages/login.php");
+        header("Location: ".base_url()."/pages/login.php");
     }
 }
 

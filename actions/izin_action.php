@@ -1,9 +1,9 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/config/application.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Izin.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Pengguna.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/library/cek_session.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/library/dompdf/autoload.inc.php";
+require_once __DIR__ . "/../config/application.php";
+include_once __DIR__ . "/../actions/_models/Izin.php";
+include_once __DIR__ . "/../actions/_models/Pengguna.php";
+include_once __DIR__ . "/../library/cek_session.php";
+include_once __DIR__ . "/../library/dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -27,7 +27,7 @@ class IzinAction
         if (!isset($_POST['guru_id']) || !isset($_POST['kelas_jurusan']) || !isset($_POST['keterangan'])) {
             $_SESSION['error'] = "Silahkan lengkapi semua inputan";
             //redirect back
-            header("Location: ../pages/izin/tambah.php");
+            header("Location: ".base_url()."/pages/izin/tambah.php");
             exit;
         }
 
@@ -49,7 +49,7 @@ class IzinAction
             if (!isset($_POST['siswa_id'])) {
                 $_SESSION['error'] = "Silahkan lengkapi semua inputan";
                 //redirect back
-                header("Location: ../pages/izin/tambah.php");
+                header("Location: ".base_url()."/pages/izin/tambah.php");
                 exit;
             }
             $data['siswa_id'] = $_POST['siswa_id'];
@@ -60,18 +60,18 @@ class IzinAction
         if ($cekSiswa['rule'] != 'siswa') {
             $_SESSION['error'] = "Siswa tidak ditemukan";
             //redirect back
-            header("Location: ../pages/izin/tambah.php");
+            header("Location: ".base_url()."/pages/izin/tambah.php");
             exit;
         }
 
         try {
             $this->model->create($data);
             $_SESSION['success'] = "Izin berhasil di tambah";
-            header("Location: ../pages/izin/index.php");
+            header("Location: ".base_url()."/pages/izin/index.php");
         } catch (\Throwable $th) {
             $_SESSION['error'] = "Izin gagal di tambah : " . $th->getMessage();
             //redirect back
-            header("Location: ../pages/izin/tambah.php");
+            header("Location: ".base_url()."/pages/izin/tambah.php");
         }
     }
 
@@ -81,7 +81,7 @@ class IzinAction
         if (!isset($_POST['guru_id']) || !isset($_POST['kelas_jurusan']) || !isset($_POST['keterangan'])) {
             $_SESSION['error'] = "Silahkan lengkapi semua inputan";
             //redirect back
-            header("Location: ../pages/izin/edit.php?id=" . $_GET['id']);
+            header("Location: ".base_url()."/pages/izin/edit.php?id=" . $_GET['id']);
             exit;
         }
 
@@ -114,7 +114,7 @@ class IzinAction
             if (!isset($_POST['siswa_id'])) {
                 $_SESSION['error'] = "Silahkan lengkapi semua inputan";
                 //redirect back
-                header("Location: ../pages/izin/tambah.php");
+                header("Location: ".base_url()."/pages/izin/tambah.php");
                 exit;
             }
             $data['siswa_id'] = $_POST['siswa_id'];
@@ -125,7 +125,7 @@ class IzinAction
         if ($cekSiswa['rule'] != 'siswa') {
             $_SESSION['error'] = "Siswa tidak ditemukan";
             //redirect back
-            header("Location: ../pages/izin/tambah.php");
+            header("Location: ".base_url()."/pages/izin/tambah.php");
             exit;
         }
 
@@ -133,11 +133,11 @@ class IzinAction
         try {
             $this->model->update($_GET['id'], $data);
             $_SESSION['success'] = "Izin berhasil di ubah";
-            header("Location: ../pages/izin/index.php");
+            header("Location: ".base_url()."/pages/izin/index.php");
         } catch (\Throwable $th) {
             $_SESSION['error'] = "Izin gagal di ubah : " . $th->getMessage();
             //redirect back
-            header("Location: ../pages/izin/edit.php?id=" . $_GET['id']);
+            header("Location: ".base_url()."/pages/izin/edit.php?id=" . $_GET['id']);
         }
     }
 
@@ -147,18 +147,18 @@ class IzinAction
         if (!isset($_GET['id'])) {
             $_SESSION['error'] = "Silahkan pilih data yang akan di hapus";
             //redirect back
-            header("Location: ../pages/izin/index.php");
+            header("Location: ".base_url()."/pages/izin/index.php");
             exit;
         }
 
         try {
             $this->model->delete($_GET['id']);
             $_SESSION['success'] = "Izin berhasil di hapus";
-            header("Location: ../pages/izin/index.php");
+            header("Location: ".base_url()."/pages/izin/index.php");
         } catch (\Throwable $th) {
             $_SESSION['error'] = "Izin gagal di hapus : " . $th->getMessage();
             //redirect back
-            header("Location: ../pages/izin/index.php");
+            header("Location: ".base_url()."/pages/izin/index.php");
         }
     }
 }
@@ -182,11 +182,11 @@ if (isset($_POST["create"])) {
             'waka_id' => $user['id']
         ]);
         $_SESSION['success'] = "Izin berhasil di verifikasi";
-        header("Location: ../pages/izin/index.php");
+        header("Location: ".base_url()."/pages/izin/index.php");
     } catch (\Throwable $th) {
         $_SESSION['error'] = "Izin gagal di verifikasi : " . $th->getMessage();
         //redirect back
-        header("Location: ../pages/izin/verifikasi_form.php?id=" . $_GET['id']);
+        header("Location: ".base_url()."/pages/izin/verifikasi_form.php?id=" . $_GET['id']);
     }
 
 } else if (isset($_POST["ditolak"]) && isset($_GET['id'])) {
@@ -199,11 +199,11 @@ if (isset($_POST["create"])) {
             'waka_id' => $user['id']
         ]);
         $_SESSION['success'] = "Izin berhasil di verifikasi";
-        header("Location: ../pages/izin/index.php");
+        header("Location: ".base_url()."/pages/izin/index.php");
     } catch (\Throwable $th) {
         $_SESSION['error'] = "Izin gagal di verifikasi : " . $th->getMessage();
         //redirect back
-        header("Location: ../pages/izin/verifikasi_form.php?id=" . $_GET['id']);
+        header("Location: ".base_url()."/pages/izin/verifikasi_form.php?id=" . $_GET['id']);
     }
 
 } else if (isset($_GET['download-pdf']) && isset($_GET['id'])) {
@@ -216,7 +216,7 @@ WHERE izin.id = " . $_GET['id'])->fetch();
 
     $file = "ijin_" . $izin['nomor'] . "_" . date("d_m_Y", strtotime($izin['tanggal'])) . "_" . $izin['id'] . ".pdf";
     ob_start();
-    require $_SERVER['DOCUMENT_ROOT'] . "/pages/izin/download-pdf.php"; // the one you posted in your question
+    require __DIR__ . "/../pages/izin/download-pdf.php"; // the one you posted in your question
     $html = ob_get_clean();
 
 
