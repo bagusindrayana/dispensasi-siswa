@@ -38,7 +38,7 @@ $notifIzins = $_model->rawQuery($_query)->fetchAll();
                     foreach ($notifIzins as $notif) {
                         ?>
 
-                        <a href="<?=$user['rule']=='waka'?'/pages/izin/verifikasi_form.php':'/pages/izin/detail.php'?>?id=<?=$notif['id']?>">
+                        <a href="<?=base_url()?><?=$user['rule']=='waka'?'/pages/izin/verifikasi_form.php':'/pages/izin/detail.php'?>?id=<?=$notif['id']?>">
                             <div class="notification">
                                 <div class="notification-icon">
                                     <i class="fas fa-envelope"></i>
@@ -66,7 +66,7 @@ $notifIzins = $_model->rawQuery($_query)->fetchAll();
                 <i class="fas fa-user"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                <a class="dropdown-item" href="#!">Profile</a>
+                <a class="dropdown-item" href="<?=base_url()?>/pages/profil.php">Profile</a>
                 <a class="dropdown-item" href="#" onclick="document.getElementById('formLogout').submit()">Logout</a>
                 <form action="/actions/login_action.php" id="formLogout" style="display: none;" method="POST">
                     <input type="hidden" name="logout" value="true">

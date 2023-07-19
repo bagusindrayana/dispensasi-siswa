@@ -1,4 +1,5 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT']."/config/application.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Pengguna.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -145,19 +146,19 @@ class PenggunaAction {
             if($check === false) {
                 $_SESSION['error'] = "File yang di upload bukan gambar";
                 //redirect back
-                header("Location: ".base_url()."/pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/edit.php?id=".$_GET['id']);
                 exit;
             }
             if ($_FILES["foto_profil"]["size"] > 5000000) {
                 $_SESSION['error'] = "Ukuran file terlalu besar";
                 //redirect back
-                header("Location: ".base_url()."/pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/edit.php?id=".$_GET['id']);
                 exit;
             }
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
                 $_SESSION['error'] = "Format file tidak di dukung";
                 //redirect back
-                header("Location: ".base_url()."/pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/edit.php?id=".$_GET['id']);
                 exit;
             }
             $data['foto_profil'] = basename($_FILES["foto_profil"]["name"]);
@@ -165,7 +166,7 @@ class PenggunaAction {
             if (!move_uploaded_file($_FILES["foto_profil"]["tmp_name"], $target_file)) {
                 $_SESSION['error'] = "File gagal di upload";
                 //redirect back
-                header("Location: ".base_url()."/pages/pengguna/tambah.php");
+                header("Location: ".base_url()."/pages/pengguna/edit.php?id=".$_GET['id']);
                 exit;
             }
         }
@@ -177,7 +178,7 @@ class PenggunaAction {
         } catch (\Throwable $th) {
             $_SESSION['error'] = "Pengguna gagal di ubah : ".$th->getMessage();
             //redirect back
-            header("Location: ".base_url()."/pages/pengguna/edit.php");
+            header("Location: ".base_url()."/pages/pengguna/edit.php?id=".$_GET['id']);
         }
     }
 
