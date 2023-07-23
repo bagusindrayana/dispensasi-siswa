@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT']."/config/application.php";
+include_once __DIR__."/../../config/application.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -7,7 +7,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/config/application.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php include_once $_SERVER['DOCUMENT_ROOT']."/assets/styles.php"; ?>
+    <?php include_once __DIR__."/../../assets/styles.php"; ?>
     <title>
         <?=$title??"Dashboard"?> - <?= @$app_name ?>
     </title>
@@ -15,9 +15,9 @@ include_once $_SERVER['DOCUMENT_ROOT']."/config/application.php";
 
 <body>
     <div class="dash">
-        <?php include_once $_SERVER['DOCUMENT_ROOT']."/pages/_partials/sidebar.php"; ?>
+        <?php include_once __DIR__."/../../pages/_partials/sidebar.php"; ?>
         <div class="dash-app">
-            <?php include_once $_SERVER['DOCUMENT_ROOT']."/pages/_partials/header.php"; ?>
-            <?php include_once $_SERVER['DOCUMENT_ROOT']."/library/session_message.php"; ?>
+            <?php include_once __DIR__."/../../pages/_partials/header.php"; ?>
+            <?php include_once __DIR__."/../../library/session_message.php"; ?>
 
             <main class="dash-content">
