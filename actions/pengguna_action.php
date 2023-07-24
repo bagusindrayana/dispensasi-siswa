@@ -1,6 +1,6 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT']."/config/application.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Pengguna.php";
+include_once __DIR__."/../config/application.php";
+include_once __DIR__ . "/../actions/_models/Pengguna.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -46,7 +46,7 @@ class PenggunaAction {
 
         //validate $_FILES['foto_profil']
         if(isset($_FILES['foto_profil']) && $_FILES['foto_profil']['name'] != "") {
-            $target_dir = $_SERVER['DOCUMENT_ROOT']."/assets/images/pengguna/";
+            $target_dir = __DIR__."/../assets/images/pengguna/";
             //check dir
             if(!file_exists($target_dir)) {
                 mkdir($target_dir, 0777, true);
@@ -135,7 +135,7 @@ class PenggunaAction {
 
         //validate $_FILES['foto_profil']
         if(isset($_FILES['foto_profil']) && $_FILES['foto_profil']['name'] != "") {
-            $target_dir = $_SERVER['DOCUMENT_ROOT']."/assets/images/pengguna/";
+            $target_dir = __DIR__."/../assets/images/pengguna/";
             //check dir
             if(!file_exists($target_dir)) {
                 mkdir($target_dir, 0777, true);
@@ -194,8 +194,8 @@ class PenggunaAction {
         try {
             $data = $this->model->findById($_GET['id']);
             //check if foto_profil is not empty and exist and delete
-            if($data['foto_profil'] != null && $data['foto_profil'] != "" && file_exists($_SERVER['DOCUMENT_ROOT']."/assets/images/pengguna/".$data['foto_profil'])) {
-                unlink($_SERVER['DOCUMENT_ROOT']."/assets/images/pengguna/".$data['foto_profil']);
+            if($data['foto_profil'] != null && $data['foto_profil'] != "" && file_exists(__DIR__."/../assets/images/pengguna/".$data['foto_profil'])) {
+                unlink(__DIR__."/../assets/images/pengguna/".$data['foto_profil']);
             }
             $this->model->delete($_GET['id']);
             $_SESSION['success'] = "Pengguna berhasil di hapus";

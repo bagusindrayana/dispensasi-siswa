@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . "/actions/_models/Izin.php";
+include_once __DIR__ . "/../../actions/_models/Izin.php";
 
 $_model = new Izin();
 $_query = "SELECT izin.*,siswa.nama_lengkap as nama_siswa,guru.nama_lengkap as nama_guru FROM izin 
@@ -68,7 +68,7 @@ $notifIzins = $_model->rawQuery($_query)->fetchAll();
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
                 <a class="dropdown-item" href="<?=base_url()?>/pages/profil.php">Profile</a>
                 <a class="dropdown-item" href="#" onclick="document.getElementById('formLogout').submit()">Logout</a>
-                <form action="/actions/login_action.php" id="formLogout" style="display: none;" method="POST">
+                <form action="<?=base_url()?>/actions/login_action.php" id="formLogout" style="display: none;" method="POST">
                     <input type="hidden" name="logout" value="true">
                 </form>
             </div>

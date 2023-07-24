@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']."/config/application.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/config/database.php";
+require_once __DIR__."/../config/application.php";
+require_once __DIR__."/../config/database.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
