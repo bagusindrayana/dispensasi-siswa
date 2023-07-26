@@ -19,6 +19,7 @@ di buat dengan PHP Native
 - buat database baru
 - import database yang ada di file `database.sql`
 - buka file `config/database.php` dan sesuaikan dengan konfigurasi database anda
+- buka file `config/application.php` dan atur `app_url` sesuai dengan url aplikasi anda
 
 ## Struktur Folder
 - `assets` berisi file-file seperti css/js/image dll
