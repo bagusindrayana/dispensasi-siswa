@@ -62,7 +62,7 @@ if ($user['rule'] == 'waka') {
                         </thead>
                         <tbody>
                             <?php
-                            $no = ((int)($_GET['page']??0)-1)*10;
+                            $no = ((int)($_GET['page']??1)-1)*10;
                             foreach ($izins as $izin) {
                                 ?>
                                 <tr>

@@ -205,12 +205,15 @@ class IzinAction
                             continue;
                         }
 
-                        if(is_string($tanggal)){
-                            $tanggal = date("Y-m-d", strtotime($tanggal));
-                        } else {
+                        try {
                             $tanggal = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($tanggal)->format('Y-m-d');
                             $tanggal = date("Y-m-d", strtotime($tanggal));
+                            
+                        } catch (\Throwable $th) {
+                            $tanggal = date("Y-m-d", strtotime($tanggal));
                         }
+
+                       
 
                         $data = [
                             'siswa_id' => $cek_siswa['id'],
