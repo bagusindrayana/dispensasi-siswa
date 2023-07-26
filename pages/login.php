@@ -17,9 +17,7 @@ if (isset($_SESSION['login']) && $_SESSION['user']) {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
         integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/spur.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
-    <script src="/assets/js/chart-js-config.js"></script>
+    <link rel="stylesheet" href="<?=base_url()?>/assets/css/spur.css">
     <title>
         <?= $app_name ?> - LOGIN
     </title>
@@ -66,7 +64,7 @@ if (isset($_SESSION['login']) && $_SESSION['user']) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="/assets/js/spur.js"></script>
+    <script src="<?=base_url()?>/assets/js/spur.js"></script>
 </body>
 
 </html>

@@ -182,26 +182,26 @@ class IzinAction
             $error = null;
             if (!empty($sheetData)) {
                 for ($i = 1; $i < count($sheetData); $i++) {
-                    $nama_siswa = $sheetData[$i][0];
-                    $nama_guru = $sheetData[$i][1];
+                    $nomor_siswa = str_replace(",", ".", $sheetData[$i][0]);
+                    $nomor_guru = str_replace(",", ".", $sheetData[$i][1]);
                     $kelas = $sheetData[$i][2];
                     $tanggal =  $sheetData[$i][3];
                     $waktu =  $sheetData[$i][4];
                     $keterangan =  $sheetData[$i][5];
 
-                    if($nama_siswa != "" && $nama_siswa != null && !str_contains(strtolower($nama_siswa), 'nama')){
+                    if($nomor_siswa != "" && $nomor_siswa != null && strpos(strtolower($nomor_siswa), 'nomor') === false){
                         
                         $m_siswa = new Pengguna();
-                        $cek_siswa = $m_siswa->rawQuery("select id from pengguna where nama_lengkap = '$nama_siswa' and rule = 'siswa'")->fetch();
+                        $cek_siswa = $m_siswa->rawQuery("select id from pengguna where nomor = '$nomor_siswa' and rule = 'siswa'")->fetch();
                         if(!$cek_siswa){
-                            $error .= "\n Siswa dengan nama $nama_siswa tidak ditemukan, ";
+                            $error .= "\n Siswa dengan nomor $nomor_siswa tidak ditemukan, ";
                             continue;
                         }
                         
                         $m_guru = new Pengguna();
-                        $cek_guru = $m_guru->rawQuery("select id from pengguna where nama_lengkap = '$nama_guru' and rule = 'guru'")->fetch();
+                        $cek_guru = $m_guru->rawQuery("select id from pengguna where nomor = '$nomor_guru' and rule = 'guru'")->fetch();
                         if(!$cek_guru){
-                            $error .= "\n Guru dengan nama $nama_guru tidak ditemukan, ";
+                            $error .= "\n Guru dengan nomor $nomor_guru tidak ditemukan, ";
                             continue;
                         }
 
@@ -296,7 +296,7 @@ if (isset($_POST["create"])) {
 
 } else if (isset($_GET['download-pdf']) && isset($_GET['id'])) {
     $modelIzin = new Izin();
-    $izin = $modelIzin->rawQuery("SELECT izin.*,siswa.nomor,siswa.nama_lengkap as nama_siswa,guru.nama_lengkap as nama_guru,waka.nama_lengkap as nama_waka FROM izin 
+    $izin = $modelIzin->rawQuery("SELECT izin.*,siswa.nomor,siswa.nama_lengkap as nomor_siswa,guru.nama_lengkap as nomor_guru,waka.nama_lengkap as nama_waka FROM izin 
 INNER JOIN pengguna as siswa ON siswa.id = izin.siswa_id 
 INNER JOIN pengguna as guru ON guru.id = izin.guru_id
 INNER JOIN pengguna as waka ON waka.id = izin.waka_id

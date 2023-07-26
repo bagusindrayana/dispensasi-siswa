@@ -229,13 +229,12 @@ class PenggunaAction
             }
 
             $spreadsheet = $reader->load($_FILES['file_excel']['tmp_name']);
-
             $sheetData = $spreadsheet->getActiveSheet()->toArray();
             $error = null;
             if (!empty($sheetData)) {
                 for ($i = 1; $i < count($sheetData); $i++) {
                     
-                    $nomor = $sheetData[$i][0];
+                    $nomor = str_replace(",", ".", $sheetData[$i][0]);
                     $nama_lengkap = $sheetData[$i][1];
                     $jenis_kelamin = $sheetData[$i][2];
                     $username = $sheetData[$i][3];
@@ -250,7 +249,7 @@ class PenggunaAction
                         continue;
                     }
 
-                    if($nomor != "" && $nomor != null && !str_contains(strtolower($nomor), 'nomor')){
+                    if($nomor != "" && $nomor != null && strpos(strtolower($nomor), 'nomor') === false){
                         $data = [
                             'nomor' => $nomor,
                             'nama_lengkap' => $nama_lengkap,

@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 if(!isset($_SESSION['login']) || !$_SESSION['user']){
-    header("Location: ../pages/login.php");
+    header("Location: ".base_url()."/pages/login.php");
     exit;
 }
 $user = $_SESSION['user'];

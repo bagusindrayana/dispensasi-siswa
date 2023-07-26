@@ -19,8 +19,8 @@ class Izin {
         $this->html_pagination = '';
         $page = 1;
         $start=0;
-        if(!empty($_POST["page"])) {
-            $page = $_POST["page"];
+        if(!empty($_GET["page"])) {
+            $page = $_GET["page"];
             $start=($page-1) * $row_per_page;
         }
         $limit=" limit " . $start . "," . $row_per_page;

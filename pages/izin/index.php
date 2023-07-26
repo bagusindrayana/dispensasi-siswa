@@ -62,12 +62,12 @@ if ($user['rule'] == 'waka') {
                         </thead>
                         <tbody>
                             <?php
-                            $no = 1;
+                            $no = ((int)($_GET['page']??0)-1)*10;
                             foreach ($izins as $izin) {
                                 ?>
                                 <tr>
                                     <th scope="row">
-                                        <?= $no++ ?>
+                                        <?= $no+=1 ?>
                                     </th>
                                     <td>
                                         <?= $izin['nama_siswa'] ?>
@@ -149,7 +149,9 @@ if ($user['rule'] == 'waka') {
                         <tfoot>
                             <tr>
                                 <td colspan="7">
-                                    <?= $model->html_pagination ?>
+                                    <form action="">
+                                        <?= $model->html_pagination ?>
+                                    </form>
                                 </td>
                             </tr>
                         </tfoot>

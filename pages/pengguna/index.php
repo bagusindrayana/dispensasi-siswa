@@ -46,12 +46,12 @@ $penggunas = $model->paginationAndSearch(10, $_GET['search'] ?? '');
                         </thead>
                         <tbody>
                             <?php
-                            $no = 1;
+                            $no = (int)(($_GET['page']??1)-1)*10;
                             foreach ($penggunas as $pengguna) {
                                 ?>
                                 <tr>
                                     <th scope="row">
-                                        <?= $no++ ?>
+                                        <?= $no += 1 ?>
                                     </th>
                                     <td>
                                         <?= $pengguna['nomor'] ?>
@@ -89,7 +89,9 @@ $penggunas = $model->paginationAndSearch(10, $_GET['search'] ?? '');
                         <tfoot>
                             <tr>
                                 <td colspan="7">
-                                    <?= $model->html_pagination ?>
+                                    <form action="">
+                                        <?= $model->html_pagination ?>
+                                    </form>
                                 </td>
                             </tr>
                         </tfoot>
