@@ -41,8 +41,10 @@ if ($user['rule'] == 'waka') {
                             value="<?= $_GET['search'] ?? '' ?>">
                     </form>
                     <?php if ($user['rule'] == 'waka' || $user['rule'] == 'siswa') { ?>
-                    <a href="<?= base_url() . '/pages/izin/tambah.php' ?>" class="btn btn-info"><i
+                    <a href="<?= base_url() . '/pages/izin/tambah.php' ?>" class="btn btn-info m-1"><i
                             class="fas fa-plus"></i> Tambah Izin</a>
+                            <a href="<?= base_url() . '/pages/izin/import.php' ?>" class="btn btn-success m-1"><i
+                            class="fas fa-file-excel"></i> Import Excel</a>
                     <?php } ?>
                 </div>
                 <div class="card-body table-responsive">
@@ -74,8 +76,8 @@ if ($user['rule'] == 'waka') {
                                         <?= $izin['kelas_jurusan'] ?>
                                     </td>
                                     <td>
-                                        <?= $izin['tanggal'] ?>/
-                                        <?= $izin['waktu'] ?>
+                                        <?= $izin['tanggal'] ?> /
+                                        <?= date("H:i",strtotime($izin['waktu'])) ?>
                                     </td>
                                     <td>
                                         <?= $izin['keterangan'] ?>

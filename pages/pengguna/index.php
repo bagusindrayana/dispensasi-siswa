@@ -26,8 +26,10 @@ $penggunas = $model->paginationAndSearch(10, $_GET['search'] ?? '');
                         <input type="text" name="search" class="searchbox-input" placeholder="type to search"
                             value="<?= $_GET['search'] ?? '' ?>">
                     </form>
-                    <a href="<?= base_url() . '/pages/pengguna/tambah.php' ?>" class="btn btn-info"><i
+                    <a href="<?= base_url() . '/pages/pengguna/tambah.php' ?>" class="btn btn-info m-1"><i
                             class="fas fa-plus"></i> Tambah Pengguna</a>
+                            <a href="<?= base_url() . '/pages/pengguna/import.php' ?>" class="btn btn-success m-1"><i
+                            class="fas fa-file-excel"></i> Import Excel</a>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table">

@@ -3,7 +3,7 @@ require_once __DIR__ . "/../config/application.php";
 include_once __DIR__ . "/../actions/_models/Izin.php";
 include_once __DIR__ . "/../actions/_models/Pengguna.php";
 include_once __DIR__ . "/../library/cek_session.php";
-include_once __DIR__ . "/../library/dompdf/autoload.inc.php";
+include_once __DIR__ . "/../library/include_library.php";
 use Dompdf\Dompdf;
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -161,6 +161,94 @@ class IzinAction
             header("Location: ".base_url()."/pages/izin/index.php");
         }
     }
+
+    //import file excel
+    public function importData()
+    {
+        $file_mimes = array('application/vnd.ms-excel', 'application/excel', 'application/vnd.msexcel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        if (isset($_FILES['file_excel']['name']) && in_array($_FILES['file_excel']['type'], $file_mimes)) {
+            $arr_file = explode('.', $_FILES['file_excel']['name']);
+            $extension = end($arr_file);
+
+            if ('csv' == $extension) {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+
+            $spreadsheet = $reader->load($_FILES['file_excel']['tmp_name']);
+
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+            $error = null;
+            if (!empty($sheetData)) {
+                for ($i = 1; $i < count($sheetData); $i++) {
+                    $nama_siswa = $sheetData[$i][0];
+                    $nama_guru = $sheetData[$i][1];
+                    $kelas = $sheetData[$i][2];
+                    $tanggal =  $sheetData[$i][3];
+                    $waktu =  $sheetData[$i][4];
+                    $keterangan =  $sheetData[$i][5];
+
+                    if($nama_siswa != "" && $nama_siswa != null && !str_contains(strtolower($nama_siswa), 'nama')){
+                        
+                        $m_siswa = new Pengguna();
+                        $cek_siswa = $m_siswa->rawQuery("select id from pengguna where nama_lengkap = '$nama_siswa' and rule = 'siswa'")->fetch();
+                        if(!$cek_siswa){
+                            $error .= "\n Siswa dengan nama $nama_siswa tidak ditemukan, ";
+                            continue;
+                        }
+                        
+                        $m_guru = new Pengguna();
+                        $cek_guru = $m_guru->rawQuery("select id from pengguna where nama_lengkap = '$nama_guru' and rule = 'guru'")->fetch();
+                        if(!$cek_guru){
+                            $error .= "\n Guru dengan nama $nama_guru tidak ditemukan, ";
+                            continue;
+                        }
+
+                        if(is_string($tanggal)){
+                            $tanggal = date("Y-m-d", strtotime($tanggal));
+                        } else {
+                            $tanggal = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($tanggal)->format('Y-m-d');
+                            $tanggal = date("Y-m-d", strtotime($tanggal));
+                        }
+
+                        $data = [
+                            'siswa_id' => $cek_siswa['id'],
+                            'guru_id' => $cek_guru['id'],
+                            'kelas_jurusan' => $kelas,
+                            'tanggal' => $tanggal,
+                            'waktu' => $waktu,
+                            'keterangan' => $keterangan,
+                        ];
+
+                        try {
+                            $this->model->create($data);
+                        } catch (\Throwable $th) {
+                            $error .= "\n Pengguna gagal di ubah : " . $th->getMessage();
+                            
+                        }
+
+                        
+                    }
+                }
+                $_SESSION['success'] = "File berhasil di import";
+            }
+            if($error != null){
+                $_SESSION['error'] = $error;
+            
+                header("Location: " . base_url() . "/pages/izin/import.php");
+            } else {
+                $_SESSION['error'] = $error;
+            
+                header("Location: " . base_url() . "/pages/izin/index.php");
+            }
+        } else {
+            $_SESSION['error'] = "Silahkan pilih file excel";
+            //redirect back
+            header("Location: " . base_url() . "/pages/izin/import.php");
+            exit;
+        }
+    }
 }
 
 if (isset($_POST["create"])) {
@@ -229,6 +317,9 @@ WHERE izin.id = " . $_GET['id'])->fetch();
     $dompdf->setPaper('A4', 'portrait');
     $dompdf->render();
     $dompdf->stream($file);
+} else if (isset($_POST["import"])) {
+    $izinAction = new IzinAction();
+    $izinAction->importData();
 } else {
     //method not allowed
     http_response_code(405);

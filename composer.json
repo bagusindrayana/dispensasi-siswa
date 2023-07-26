@@ -1,0 +1,7 @@
+{
+    "name": "bagus/dispensasi-siswa",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.29",
+        "dompdf/dompdf": "^2.0"
+    }
+}

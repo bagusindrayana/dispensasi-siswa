@@ -39,7 +39,7 @@ include_once __DIR__ . "/../../actions/_models/Pengguna.php";
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nomor">Nomor (NIK/NIP/NIM) <small class="text-danger">*</small></label>
+                            <label for="nomor">Nomor (NIK/NIP/NIM/NISN) <small class="text-danger">*</small></label>
                             <input type="text" class="form-control" name="nomor" required id="nomor"
                                 placeholder="Nomor...">
                         </div>

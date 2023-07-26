@@ -41,7 +41,7 @@ $pengguna = $model->findById($_GET['id']);
                                         style="width: 200px;height: 200px;" id="img-preview">
                                     <br>
                                     <br>
-                                    <input type="file" class="form-control" name="foto_profil" required id="foto_profil"
+                                    <input type="file" class="form-control" name="foto_profil" id="foto_profil"
                                         accept="image/*" onchange="onFileChange(event)">
                                 </div>
                             </div>
