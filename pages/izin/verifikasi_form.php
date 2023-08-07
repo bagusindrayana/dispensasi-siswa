@@ -71,8 +71,8 @@ if ($izin['status'] != 'pending') {
                         </ul>
                         <hr>
                         <div class="form-group">
-                            <label for="keterangan_status_diubah">Keterangan Tambahan <small class="text-danger">*</small></label>
-                            <textarea class="form-control" required id="keterangan_status_diubah" name="keterangan_status_diubah" required></textarea>
+                            <label for="keterangan_status_diubah">Keterangan Tambahan</label>
+                            <textarea class="form-control" id="keterangan_status_diubah" name="keterangan_status_diubah"></textarea>
                         </div>
                         <button type="submit" class="btn btn-success" name="disetujui">SETUJUI</button>
                         <button type="submit" class="btn btn-danger" name="ditolak">TOLAK</button>

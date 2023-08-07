@@ -94,7 +94,9 @@ $izins = $model->paginationAndSearch(10, $_GET['search'] ?? '',$query);
                         <tfoot>
                             <tr>
                                 <td colspan="7">
-                                    <?= $model->html_pagination ?>
+                                   <form action="">
+                                   <?= $model->html_pagination ?>
+                                   </form>
                                 </td>
                             </tr>
                         </tfoot>

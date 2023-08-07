@@ -13,7 +13,7 @@ if ($user['rule'] == 'waka') {
     $query = "SELECT izin.*,siswa.nama_lengkap as nama_siswa,guru.nama_lengkap as nama_guru FROM izin 
     INNER JOIN pengguna as siswa ON siswa.id = izin.siswa_id 
     INNER JOIN pengguna as guru ON guru.id = izin.guru_id 
-    WHERE (siswa.nama_lengkap LIKE :keyword OR guru.nama_lengkap LIKE :keyword OR izin.tanggal LIKE :keyword OR izin.keterangan LIKE :keyword) AND izin.status = 'pending' AND izin.guru_id = " . $user['id'] . "
+    WHERE (siswa.nama_lengkap LIKE :keyword OR guru.nama_lengkap LIKE :keyword OR izin.tanggal LIKE :keyword OR izin.keterangan LIKE :keyword) AND izin.guru_id = " . $user['id'] . "
     ORDER BY izin.id DESC ";
     $izins = $model->paginationAndSearch(10, $_GET['search'] ?? '', $query);
 } else if ($user['rule'] == 'siswa') {
@@ -110,12 +110,12 @@ if ($user['rule'] == 'waka') {
                                             <?php } else {
                                                 ?>
                                                 <a href="<?= base_url() . '/pages/izin/detail.php?id=' . $izin['id'] ?>"
-                                                    class="btn btn-info"><i class="fas fa-edit"></i> Detail</a>
+                                                    class="btn btn-info"><i class="fas fa-eye"></i> Detail</a>
                                                 <?php
                                             } ?>
                                         <?php } else { ?>
                                             <a href="<?= base_url() . '/pages/izin/detail.php?id=' . $izin['id'] ?>"
-                                                    class="btn btn-info"><i class="fas fa-edit"></i> Detail</a>
+                                                    class="btn btn-info"><i class="fas fa-eye"></i> Detail</a>
                                                     <a href="<?= base_url() . '/actions/izin_action.php?download-pdf=true&id=' . $izin['id'] ?>"
                                                     class="btn btn-info" target="_blank"><i class="fas fa-file"></i> Download</a>
                                                 <br>

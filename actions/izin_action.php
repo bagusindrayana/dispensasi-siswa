@@ -266,16 +266,44 @@ if (isset($_POST["create"])) {
 } else if (isset($_POST["disetujui"]) && isset($_GET['id'])) {
     $izinAction = new IzinAction();
     try {
+       
+        $izin = $izinAction->model->findById($_GET['id']);
+        $model_pengguna = new Pengguna();
+        $pengguna = $model_pengguna->findById($izin['siswa_id']);
+        $kontak = $pengguna['kontak'];
+        $nomor_wa = $kontak;
         $izinAction->model->update($_GET['id'], [
             'status' => 'disetujui',
             'keterangan_status_diubah' => $_POST['keterangan_status_diubah'],
             'waktu_status_diubah' => date("Y-m-d H:i:s"),
             'waka_id' => $user['id']
         ]);
-        $_SESSION['success'] = "Izin berhasil di verifikasi";
-        header("Location: ".base_url()."/pages/izin/index.php");
+        $_SESSION['success'] = "Izin berhasil disetujui";
+        if($nomor_wa != "" && $nomor_wa != null){
+            //check if first number not 62
+                if (substr($kontak, 0, 2) != '62') {
+                    $nomor_wa = '62' . substr($kontak, 1);
+                }
+$msg = "
+Dispensasi atas nama : \n
+Nama : ".$pengguna['nama_lengkap']." \n
+Tanggal : ".$izin['tanggal']." \n
+Jam : ".$izin['waktu']." \n
+Telah disetujui oleh Waka \n
+";
+                echo "<h1>Loading...</h1><script>
+
+                window.onload = function(){
+                    window.open(`https://wa.me/$nomor_wa?text=$msg`, '_blank'); // will open new tab on window.onload
+                    window.location.href = '".base_url()."/pages/izin/verifikasi.php';
+                }
+            </script>";
+        } else {
+            header("Location: ".base_url()."/pages/izin/verifikasi.php");
+        }
+        
     } catch (\Throwable $th) {
-        $_SESSION['error'] = "Izin gagal di verifikasi : " . $th->getMessage();
+        $_SESSION['error'] = "Izin gagal disetujui : " . $th->getMessage();
         //redirect back
         header("Location: ".base_url()."/pages/izin/verifikasi_form.php?id=" . $_GET['id']);
     }
@@ -283,16 +311,48 @@ if (isset($_POST["create"])) {
 } else if (isset($_POST["ditolak"]) && isset($_GET['id'])) {
     $izinAction = new IzinAction();
     try {
+        
+        $izin = $izinAction->model->findById($_GET['id']);
+        $model_pengguna = new Pengguna();
+        $pengguna = $model_pengguna->findById($izin['siswa_id']);
+        $kontak = $pengguna['kontak'];
+        $nomor_wa = $kontak;
         $izinAction->model->update($_GET['id'], [
             'status' => 'ditolak',
             'keterangan_status_diubah' => $_POST['keterangan_status_diubah'],
             'waktu_status_diubah' => date("Y-m-d H:i:s"),
             'waka_id' => $user['id']
         ]);
-        $_SESSION['success'] = "Izin berhasil di verifikasi";
-        header("Location: ".base_url()."/pages/izin/index.php");
+       
+        $_SESSION['success'] = "Izin berhasil ditolak";
+        if($nomor_wa != "" && $nomor_wa != null){
+            //check if first number not 62
+                if (substr($kontak, 0, 2) != '62') {
+                    $nomor_wa = '62' . substr($kontak, 1);
+                }
+             
+$msg = "
+Dispensasi atas nama : \n
+Nama : ".$pengguna['nama_lengkap']." \n
+Tanggal : ".$izin['tanggal']." \n
+Jam : ".$izin['waktu']." \n
+Di tolak oleh waka \n
+Dengan Keterangan : \n
+*".$_POST['keterangan_status_diubah']."*
+";
+                echo "
+                <h1>Loading...</h1>
+                <script>
+                window.onload = function(){
+                    window.open(`https://wa.me/$nomor_wa?text=$msg`, '_blank'); // will open new tab on window.onload
+                    window.location.href = '".base_url()."/pages/izin/verifikasi.php';
+                }
+            </script>";
+        } else {
+            header("Location: ".base_url()."/pages/izin/verifikasi.php");
+        }
     } catch (\Throwable $th) {
-        $_SESSION['error'] = "Izin gagal di verifikasi : " . $th->getMessage();
+        $_SESSION['error'] = "Izin gagal ditolak : " . $th->getMessage();
         //redirect back
         header("Location: ".base_url()."/pages/izin/verifikasi_form.php?id=" . $_GET['id']);
     }
