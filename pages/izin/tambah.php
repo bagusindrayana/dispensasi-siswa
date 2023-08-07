@@ -58,12 +58,12 @@ $gurus = $modelIzin->rawQuery("SELECT * FROM pengguna WHERE rule = 'guru'")->fet
 
                         <div class="form-group">
                             <label for="tanggal">Tanggal <small class="text-danger">*</small></label>
-                            <input type="date" class="form-control" required id="tanggal" name="tanggal" required
+                            <input type="date" class="form-control" min="<?=date("Y-m-d")?>" required id="tanggal" name="tanggal" required
                                 value="<?= date('Y-m-d') ?>">
                         </div>
                         <div class="form-group">
                             <label for="waktu">Waktu <small class="text-danger">*</small></label>
-                            <input type="time" class="form-control" required id="waktu" name="waktu" step="60" required
+                            <input type="time" class="form-control" min="<?=date("H:i")?>" required id="waktu" name="waktu" step="60" required
                                 value="<?= date('H:i') ?>">
                         </div>
                         <div class="form-group">

@@ -56,11 +56,11 @@ if ($izin['status'] != 'pending') {
                        
                         <div class="form-group">
                             <label for="tanggal">Tanggal <small class="text-danger">*</small></label>
-                            <input type="date" class="form-control" required id="tanggal" name="tanggal" required value="<?= $izin['tanggal'] ?>">
+                            <input type="date" class="form-control" min="<?=date("Y-m-d")?>" required id="tanggal" name="tanggal" required value="<?= $izin['tanggal'] ?>">
                         </div>
                         <div class="form-group">
                             <label for="waktu">Waktu <small class="text-danger">*</small></label>
-                            <input type="time" class="form-control" required id="waktu" name="waktu" required value="<?= date("H:i",strtotime($izin['waktu'])) ?>">
+                            <input type="time" class="form-control" min="<?=date("H:i")?>" required id="waktu" name="waktu" required value="<?= date("H:i",strtotime($izin['waktu'])) ?>">
                         </div>
                         <div class="form-group">
                             <label for="keterangan">Keterangan <small class="text-danger">*</small></label>

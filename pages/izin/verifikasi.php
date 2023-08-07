@@ -48,12 +48,12 @@ $izins = $model->paginationAndSearch(10, $_GET['search'] ?? '',$query);
                         </thead>
                         <tbody>
                             <?php
-                            $no = 1;
+                            $no = ((int)($_GET['page']??1)-1)*10;
                             foreach ($izins as $izin) {
                                 ?>
                                 <tr>
                                     <th scope="row">
-                                        <?= $no++ ?>
+                                        <?= $no+=1 ?>
                                     </th>
                                     <td>
                                         <?= $izin['nama_siswa'] ?>

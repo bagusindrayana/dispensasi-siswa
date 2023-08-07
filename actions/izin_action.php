@@ -43,6 +43,22 @@ class IzinAction
 
         ];
 
+        //validate tanggal cant be less than today
+        if (strtotime($data['tanggal']) < strtotime(date("Y-m-d"))) {
+            $_SESSION['error'] = "Tanggal tidak boleh kurang dari hari ini";
+            //redirect back
+            header("Location: ".base_url()."/pages/izin/tambah.php");
+            exit;
+        }
+
+        //validate waktu cant be less than today and time
+        if (strtotime($data['tanggal']) == strtotime(date("Y-m-d")) && strtotime($data['waktu']) < strtotime(date("H:i"))) {
+            $_SESSION['error'] = "Waktu tidak boleh kurang dari waktu ini";
+            //redirect back
+            header("Location: ".base_url()."/pages/izin/tambah.php");
+            exit;
+        }
+
         if ($user['rule'] == 'siswa') {
             $data['siswa_id'] = $user['id'];
         } else {
@@ -108,13 +124,29 @@ class IzinAction
 
         ];
 
+        //validate tanggal cant be less than today
+        if (strtotime($data['tanggal']) < strtotime(date("Y-m-d"))) {
+            $_SESSION['error'] = "Tanggal tidak boleh kurang dari hari ini";
+            //redirect back
+            header("Location: ".base_url()."/pages/izin/edit.php?id=" . $_GET['id']);
+            exit;
+        }
+
+        //validate waktu cant be less than today and time
+        if (strtotime($data['tanggal']) == strtotime(date("Y-m-d")) && strtotime($data['waktu']) < strtotime(date("H:i"))) {
+            $_SESSION['error'] = "Waktu tidak boleh kurang dari waktu ini";
+            //redirect back
+            header("Location: ".base_url()."/pages/izin/edit.php?id=" . $_GET['id']);
+            exit;
+        }
+
         if ($user['rule'] == 'siswa') {
             $data['siswa_id'] = $user['id'];
         } else {
             if (!isset($_POST['siswa_id'])) {
                 $_SESSION['error'] = "Silahkan lengkapi semua inputan";
                 //redirect back
-                header("Location: ".base_url()."/pages/izin/tambah.php");
+                header("Location: ".base_url()."/pages/izin/edit.php?id=" . $_GET['id']);
                 exit;
             }
             $data['siswa_id'] = $_POST['siswa_id'];
@@ -125,7 +157,7 @@ class IzinAction
         if ($cekSiswa['rule'] != 'siswa') {
             $_SESSION['error'] = "Siswa tidak ditemukan";
             //redirect back
-            header("Location: ".base_url()."/pages/izin/tambah.php");
+            header("Location: ".base_url()."/pages/izin/edit.php?id=" . $_GET['id']);
             exit;
         }
 
