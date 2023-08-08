@@ -323,11 +323,16 @@ Tanggal : ".$izin['tanggal']." \n
 Jam : ".$izin['waktu']." \n
 Telah disetujui oleh Waka \n
 ";
-                echo "<h1>Loading...</h1><script>
+                echo "<h1>Loading...</h1>
+                <h1><a href='".base_url()."/pages/izin/verifikasi.php' target='_blank'>Kembali Ke Data Izin</a></h1>
+                <h1><a href='https://wa.me/$nomor_wa?text=$msg' target='_blank'>Kirim Wa Ke Siswa</a></h1>
+                <script>
 
                 window.onload = function(){
-                    window.open(`https://wa.me/$nomor_wa?text=$msg`, '_blank'); // will open new tab on window.onload
-                    window.location.href = '".base_url()."/pages/izin/verifikasi.php';
+                    var wa = window.open(`https://wa.me/$nomor_wa?text=$msg`, '_blank'); // will open new tab on window.onload
+                    if(wa != null){
+                        window.location.href = '".base_url()."/pages/izin/verifikasi.php';
+                    }
                 }
             </script>";
         } else {
@@ -372,14 +377,18 @@ Di tolak oleh waka \n
 Dengan Keterangan : \n
 *".$_POST['keterangan_status_diubah']."*
 ";
-                echo "
-                <h1>Loading...</h1>
-                <script>
-                window.onload = function(){
-                    window.open(`https://wa.me/$nomor_wa?text=$msg`, '_blank'); // will open new tab on window.onload
-                    window.location.href = '".base_url()."/pages/izin/verifikasi.php';
-                }
-            </script>";
+echo "<h1>Loading...</h1>
+<h1><a href='".base_url()."/pages/izin/verifikasi.php' target='_blank'>Kembali Ke Data Izin</a></h1>
+<h1><a href='https://wa.me/$nomor_wa?text=$msg' target='_blank'>Kirim Wa Ke Siswa</a></h1>
+<script>
+
+window.onload = function(){
+    var wa = window.open(`https://wa.me/$nomor_wa?text=$msg`, '_blank'); // will open new tab on window.onload
+    if(wa != null){
+        window.location.href = '".base_url()."/pages/izin/verifikasi.php';
+    }
+}
+</script>";
         } else {
             header("Location: ".base_url()."/pages/izin/verifikasi.php");
         }
